@@ -31,14 +31,10 @@ public class AnimalTest {
         assertEquals("Еда должна соответствовать отряду животного",expectedTextFood, actualFood);
     }
 
-    @Test
-    public void shouldReturnThrowException() {
+    @Test(expected = Exception.class)
+    public void shouldReturnThrowException() throws Exception {
         Animal animal = new Animal();
-        try {
-            List<String> foods = animal.getFood("неизвестное животное");
-        } catch (Exception e) {
-            assertEquals( "Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
-        }
+        animal.getFood("Неизвестное животное");
     }
 
     @Test

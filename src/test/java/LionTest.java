@@ -30,14 +30,9 @@ public class LionTest {
         assertFalse("При создании самки hasMane должно быть false", actualHasMane);
     }
 
-    @Test
-    public void shouldReturnThrowException() {
-        try {
-            Lion lion = new Lion("родитель №1", feline);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            assertEquals( "Используйте допустимые значения пола животного - самец или самка", e.getMessage());
-        }
+    @Test(expected = Exception.class)
+    public void shouldReturnThrowException() throws Exception {
+        new Lion("родитель №1", feline);
     }
     @Test
     public void shouldReturnOneKitten() throws Exception {
