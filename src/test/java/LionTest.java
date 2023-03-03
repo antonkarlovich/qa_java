@@ -1,7 +1,9 @@
 
 import com.example.Feline;
 import com.example.Lion;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import java.util.List;
 import org.mockito.Mock;
@@ -30,8 +32,13 @@ public class LionTest {
         assertFalse("При создании самки hasMane должно быть false", actualHasMane);
     }
 
-    @Test(expected = Exception.class)
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
     public void shouldReturnThrowException() throws Exception {
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Используйте допустимые значения пола животного - самец или самка");
         new Lion("родитель №1", feline);
     }
     @Test

@@ -1,9 +1,13 @@
 import com.example.Animal;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import static org.junit.Assert.assertEquals;
 import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 
 @RunWith(Parameterized.class)
 public class AnimalTest {
@@ -24,6 +28,8 @@ public class AnimalTest {
         };
     }
 
+
+
     @Test
     public void shouldReturnGetCorrectListFood() throws Exception {
         Animal animal = new Animal();
@@ -31,10 +37,16 @@ public class AnimalTest {
         assertEquals("Еда должна соответствовать отряду животного",expectedTextFood, actualFood);
     }
 
-    @Test(expected = Exception.class)
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
     public void shouldReturnThrowException() throws Exception {
         Animal animal = new Animal();
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Неизвестный вид животного, используйте значение Травоядное или Хищник");
         animal.getFood("Неизвестное животное");
+
     }
 
     @Test
